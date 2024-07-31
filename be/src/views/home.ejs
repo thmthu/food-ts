@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homemmm</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: coral;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/create-page">Create</a>
+
+    </div>
+    <h2>Hoverable Table</h2>
+
+    <p>Move the mouse over the table rows to see the effect.</p>
+
+    <table>
+        <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Action</th>
+
+        </tr>
+        <% for(var i=0; i<users.length; i++) {%>
+            <tr>
+
+                <th>
+                    <%= users[i].email%>
+                </th>
+                <th>
+                    <%= users[i].name%>
+                </th>
+                <th>
+                    <%= users[i].city%>
+                </th>
+                <th>
+                    <a href="/update/<%= users[i].id%>">Edit</a>
+                    <button> Delete</button>
+
+                </th>
+
+            </tr>
+            <% } %>
+
+
+    </table>
+
+</body>
+
+</html>
