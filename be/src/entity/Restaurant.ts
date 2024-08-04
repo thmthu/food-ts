@@ -1,5 +1,5 @@
 import { EntitySchema } from "typeorm";
-import { Restaurant } from "../entityModels/Restaurant"; // Adjust the import path as necessary
+import { Restaurant } from "../entity-models/Restaurant"; // Adjust the import path as necessary
 
 export const RestaurantSchema = new EntitySchema<Restaurant>({
     name: "Restaurant",
@@ -24,14 +24,7 @@ export const RestaurantSchema = new EntitySchema<Restaurant>({
             type: "text",
             nullable: false,
         },
-        lng: {
-            type: "double",
-            nullable: true,
-        },
-        lat: {
-            type: "double",
-            nullable: true,
-        },
+
         address: {
             type: String,
             length: 255,
@@ -39,11 +32,6 @@ export const RestaurantSchema = new EntitySchema<Restaurant>({
         },
         stars: {
             type: "float",
-            nullable: true,
-        },
-        reviews: {
-            type: String,
-            length: 255,
             nullable: true,
         },
         category: {

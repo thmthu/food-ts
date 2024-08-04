@@ -1,4 +1,4 @@
-import { AppDataSourceSingleton } from '../classModels/AppDataSourceSingleton';
+import { AppDataSourceSingleton } from '../class-models/AppDataSourceSingleton';
 import { UserSchema, BillSchema, BillDetailSchema, DishSchema, FeaturedSchema, RestaurantSchema } from '../entity';
 
 import { Request, Response } from 'express';

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AppDataSourceSingleton } from '../classModels/AppDataSourceSingleton';
+import { AppDataSourceSingleton } from '../class-models/AppDataSourceSingleton';
 import { BillSchema, UserSchema, BillDetailSchema } from '../entity';
 
 const login = async (req: Request, res: Response): Promise<Response> => {

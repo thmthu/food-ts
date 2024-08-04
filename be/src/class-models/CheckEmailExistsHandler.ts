@@ -1,5 +1,5 @@
 import { Repository } from 'typeorm';
-import { User } from '../entityModels/User';
+import { User } from '../entity-models/User';
 import UserHandler from './UserHandler';
 import { Response } from 'express';
 class CheckEmailExistsHandler extends UserHandler {

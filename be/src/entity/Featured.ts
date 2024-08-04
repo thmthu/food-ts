@@ -1,5 +1,5 @@
 import { EntitySchema } from "typeorm";
-import { Featured } from "../entityModels/Featured";
+import { Featured } from "../entity-models/Featured";
 export const FeaturedSchema = new EntitySchema<Featured>({
     name: "Featured",
     tableName: "Featured",
