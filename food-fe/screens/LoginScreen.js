@@ -6,7 +6,8 @@ import TextInputCustom from '../components/TextInputCustom';
 import { useNavigation } from '@react-navigation/native';
 import { setEmail } from '../slices/emailSlice';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../api/userApi';
+import { config } from "../config/baseURL";
+
 export default function LoginScreen() {
     const navi = useNavigation();
     const dispatch = useDispatch();
@@ -15,17 +16,36 @@ export default function LoginScreen() {
     const [isShowMess, setShowMessage] = useState(false);
 
 
-    const handleMessage = (mess, isShow) => {
+    const handlleMessage = (mess, isShow) => {
         setMessage(mess);
         setShowMessage(isShow);
     }
     const handleSubmit = async (values) => {
         try {
-            const data = await loginUser(values.email, values.password);
-            dispatch(setEmail(values.email));
-            navi.navigate('HomeScreen');
+            if (values.email == "" || values.password == "") {
+                handlleMessage("Please fill all fields", true);
+                return;
+            }
+            const response = await fetch(`${config.apiUrl}login`, {
+                method: 'POST', // specify the method
+                headers: {
+                    'Content-Type': 'application/json' // specify the data type
+                },
+                body: JSON.stringify(values) // include the data in the body
+            });
+            if (response.ok) { // check if the request was successful
+                const data = await response.json(); // parse the response as JSON
+                handlleMessage("Login successful", true);
+                dispatch(setEmail(values.email)); // Save the user's email in the Redux store
+                navi.navigate('Home', { email: values.email });
+                handlleMessage("", true);
+
+            } else {
+                handlleMessage("Login failed. Username or password is incorrect", true);
+                console.log('Request failed');
+            }
         } catch (error) {
-            handleMessage('Login failed. Please try again.', true);
+            console.error(error);
         }
     }
 

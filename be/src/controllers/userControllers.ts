@@ -36,20 +36,6 @@ const signup = async (req: Request, res: Response): Promise<Response> => {
         });
         await userRepository.save(newUser);
 
-        // const [existingUsers] = await connection.query(
-        //     'SELECT * FROM Users WHERE LOWER(email) = LOWER(?) OR LOWER(username) = LOWER(?)',
-        //     [email, user]
-        // );
-
-        // if (existingUsers.length > 0) {
-        //     return res.status(400).json({ message: 'Email or username already exists' });
-        // }
-
-        // await connection.query(
-        //     'INSERT INTO Users (email, password, username, address) VALUES (?,?,?,?)',
-        //     [email, password, user, address]
-        // );
-
         return res.status(201).json({ message: 'User created' });
     }
     catch (error) {
@@ -77,22 +63,6 @@ const bill = async (req: Request, res: Response): Promise<Response> => {
             });
             await dataSource.getRepository(BillDetailSchema).save(newBill);
         }
-        // Insert into Bills table
-        // const [bill] = await connection.query(
-        //     'INSERT INTO Bills (email, total) VALUES (?,?)',
-        //     [email, total]
-        // );
-
-        // // Get the id of the inserted bill
-        // const billId = bill.insertId;
-
-        // // Insert into BillDetails table
-        // for (let detail of billDetails) {
-        //     await connection.query(
-        //         'INSERT INTO BillDetails (bill_id, dish_id, quantity) VALUES (?,?,?)',
-        //         [billId, detail.dish_id, detail.quantity]
-        //     );
-        // }
 
         return res.status(201).json({ message: 'Bill created' });
     } catch (error) {

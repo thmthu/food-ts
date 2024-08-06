@@ -3,6 +3,7 @@ import { Button, TextInput, View, Text, TouchableOpacity, TouchableWithoutFeedba
 import { Formik } from 'formik';
 import TextInputCustom from '../components/TextInputCustom';
 import { useNavigation } from '@react-navigation/native';
+import { config } from "../config/baseURL";
 export default function SignUpScreen() {
     const navi = useNavigation();
 
@@ -20,7 +21,7 @@ export default function SignUpScreen() {
                 handlleMessage("Please fill all fields", true);
                 return;
             }
-            fetch('http://172.20.240.1:3000/signup', {
+            fetch(`${config.apiUrl}signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
