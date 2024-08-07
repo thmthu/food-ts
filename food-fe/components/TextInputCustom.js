@@ -18,12 +18,12 @@ const TextInputCustom = ({ hidePassword, setHidePassword, isPassword, style, ico
                 {...props}
 
             />
-            {(isPassword) &&
+            {/* {(isPassword) &&
                 (<TouchableOpacity className="m-2" onPress={() => setHidePassword(!hidePassword)}>
                     <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={24} color={"rgba(251, 150, 40, 0.5)"}></Ionicons>
                 </TouchableOpacity>)
 
-            }
+            } */}
         </View>
     )
 }

@@ -26,7 +26,7 @@ export default function RestaurantScreen() {
     const [res, setRes] = useState(null); // Set initial state to null
 
     useEffect(() => {
-        setData(`restaurant/${id}`, setRes);
+        setData(`${id}`, setRes);
         setData(`restaurantDetails/${id}`, setDishes);
 
     }, []);
@@ -42,7 +42,7 @@ export default function RestaurantScreen() {
                 <View className="relative">
                     <StatusBar themeColors='white' />
                     {res && (
-                        <Image source={{ uri: res.image }} style={{ width: screenWidth, height: 100 }} />
+                        <Image source={{ uri: res.image }} style={{ width: screenWidth, height: 300 }} />
                     )}
                     <TouchableOpacity
                         onPress={() => navi.goBack()}

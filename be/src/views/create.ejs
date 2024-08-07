@@ -7,67 +7,27 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-
 <body>
     <div class="topnav">
-        <a href="/">Home</a>
-        <a class="active" href="/create-page">Create</a>
+        <a href="/manage/update-page">Update</a>
+        <a href="/manage/create-page" class="active">Create</a>
+        <a href="/manage/home">Home</a>
     </div>
     <div class="form">
-        <form action="/create" method="POST">
+        <form id="createForm" action="/manage/create-restaurant" method="POST">
             <fieldset>
                 <legend>Restaurant Information:</legend>
                 <div class="input-group">
                     <label>Restaurant ID</label>
-                    <input type="text" name="restaurantId">
+                    <input type="text" name="restaurant_id">
                 </div>
-                <!-- <div class="input-group">
-                    <label>Restaurant Name</label>
-                    <input type="text" name="restaurantName">
-                </div>
-                <div class="input-group">
-                    <label>Restaurant Image</label>
-                    <input type="text" name="restaurantImage">
-                </div>
-                <div class="input-group">
-                    <label>Restaurant Description</label>
-                    <input type="text" name="restaurantDescription">
-                </div>
-                <div class="input-group">
-                    <label>Longitude</label>
-                    <input type="text" name="lng">
-                </div>
-                <div class="input-group">
-                    <label>Latitude</label>
-                    <input type="text" name="lat">
-                </div>
-                <div class="input-group">
-                    <label>Address</label>
-                    <input type="text" name="address">
-                </div>
-                <div class="input-group">
-                    <label>Stars</label>
-                    <input type="text" name="stars">
-                </div>
-                <div class="input-group">
-                    <label>Reviews</label>
-                    <input type="text" name="reviews">
-                </div>
-                <div class="input-group">
-                    <label>Category</label>
-                    <input type="text" name="category">
-                </div>
-                <div class="input-group">
-                    <label>Stars</label>
-                    <input type="text" name="stars">
-                </div> -->
                 <div class="input-group">
                     <label>ID food</label>
-                    <input type="text" name="foodId">
+                    <input type="text" name="id">
                 </div>
                 <div class="input-group">
                     <label>name</label>
-                    <input type="text" name="nameFood">
+                    <input type="text" name="name">
                 </div>
                 <div class="input-group">
                     <label>image</label>
@@ -75,7 +35,7 @@
                 </div>
                 <div class="input-group">
                     <label>Description</label>
-                    <input type="text" name="descriptionFood">
+                    <input type="text" name="description">
                 </div>
                 <div class="input-group">
                     <label>price</label>
@@ -84,9 +44,30 @@
                 <div>
                     <input type="submit" value="Submit">
                 </div>
+                <div id="responseMessage"></div> <!-- Div to display the response message -->
             </fieldset>
         </form>
     </div>
+
+    <script>
+        document.getElementById('createForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(this);
+
+            fetch('/manage/create-restaurant', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('responseMessage').innerText = 'Success';
+                })
+                .catch(error => {
+                    document.getElementById('responseMessage').innerText = 'An error occurred: ' + error;
+                });
+        });
+    </script>
 </body>
 
 </html>

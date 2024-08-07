@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { setEmail } from '../slices/emailSlice';
 import { useDispatch } from 'react-redux';
 import { config } from "../config/baseURL";
+import { loginUser } from '../api/userApi';
 
 export default function LoginScreen() {
     const navi = useNavigation();
@@ -26,17 +27,10 @@ export default function LoginScreen() {
                 handlleMessage("Please fill all fields", true);
                 return;
             }
-            const response = await fetch(`${config.apiUrl}login`, {
-                method: 'POST', // specify the method
-                headers: {
-                    'Content-Type': 'application/json' // specify the data type
-                },
-                body: JSON.stringify(values) // include the data in the body
-            });
-            if (response.ok) { // check if the request was successful
-                const data = await response.json(); // parse the response as JSON
+            const response = await loginUser(values.email, values.password);
+            if (response) {
                 handlleMessage("Login successful", true);
-                dispatch(setEmail(values.email)); // Save the user's email in the Redux store
+                dispatch(setEmail(values.email));
                 navi.navigate('Home', { email: values.email });
                 handlleMessage("", true);
 
