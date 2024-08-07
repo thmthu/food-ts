@@ -3,7 +3,7 @@ import { config } from "../config/baseURL";
 export const fetchData = async (type) => {
     try {
         const baseURL = config.apiUrl
-        const response = await fetch(`${baseURL}${type}`);
+        const response = await fetch(`${baseURL}api/restaurants/${type}`);
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
         }

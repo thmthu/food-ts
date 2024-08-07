@@ -18,7 +18,7 @@ export default function CartIcon() {
         return null
 
     return (
-        <View className="absolute bottom-0 w-full z-50 " >
+        <View className="absolute bottom-12 w-full z-50 " >
             <TouchableOpacity
                 onPress={() => navi.navigate('Cart')}
                 style={

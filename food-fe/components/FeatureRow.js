@@ -22,9 +22,9 @@ export default function FeatureRow(props) {
                     <Text className="font-extrabold text-xl">{title}</Text>
                     <Text className="text-gray-400">{description}</Text>
                 </View>
-                <TouchableOpacity>
+                {/* <TouchableOpacity onPress={()=>navigation.navigate('Search', { restaurantName })}>
                     <Text style={{ color: themeColors.text(1) }} className="font-bold text-l">See all</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
 
             <ScrollView

@@ -3,7 +3,7 @@ import { Button, TextInput, View, Text, TouchableOpacity, TouchableWithoutFeedba
 import { Formik } from 'formik';
 import TextInputCustom from '../components/TextInputCustom';
 import { useNavigation } from '@react-navigation/native';
-import { config } from "../config/baseURL";
+import { registerUser } from '../api/userApi';
 export default function SignUpScreen() {
     const navi = useNavigation();
 
@@ -21,28 +21,9 @@ export default function SignUpScreen() {
                 handlleMessage("Please fill all fields", true);
                 return;
             }
-            fetch(`${config.apiUrl}signup`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(err => { throw err; });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.message) {
-                        handlleMessage(data.message, true);
-                    }
-                })
-                .catch((error) => {
-                    handlleMessage(error.message, true);
+            const data = await registerUser(values);
+            handlleMessage(data.message, true);
 
-                });
         }
         catch (error) {
             console.error('Error2:', error);
@@ -104,7 +85,7 @@ export default function SignUpScreen() {
                         <TextInputCustom
                             style={{ marginBottom: 15 }}
                             label="password"
-                            icon="lock-closed"
+                            // icon="lock-closed"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             placeholder="*******"

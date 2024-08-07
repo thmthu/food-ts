@@ -10,37 +10,13 @@
 
 <body>
     <div class="topnav">
-        <a href="/">Home</a>
-        <a class="active" href=" /update">Update</a>
-    </div>
-    <div class="form">
-        <form action="/update-user" method="POST">
-            <fieldset>
-                <legend>Personalia:</legend>
-                <div class="input-groups">
-                    <div class="input-group hidden">
+        <a class="active" href="/manage/update-page">Update</a>
+        <a href="/manage/create-page">Create</a>
+        <a href="/manage/home">Home</a>
 
-                        <label>ID</label>
-                        <input type="text" name="id" value="<%= myUser.id %>">
-                    </div>
-                    <div class="input-group">
-                        <label>Email</label>
-                        <input type="text" name="email" value="<%= myUser.email %>">
-                    </div>
-                    <div class="input-group">
-                        <label>Name</label>
-                        <input type="text" name="name" value="<%= myUser.name %>">
-                    </div>
-                    <div class="input-group">
-                        <label>City</label>
-                        <input type="text" name="city" value="<%= myUser.city %>">
-                    </div>
-                    <div>
-                        <input type="submit" value="Submit">
-                    </div>
-            </fieldset>
-        </form>
     </div>
+    <div> heloooooo</div>
+
 </body>
 
 </html>

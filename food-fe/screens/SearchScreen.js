@@ -1,11 +1,43 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import React, { useEffect } from 'react'
 import SearchBar from '../components/SearchBar'
-export default function WaitScreen() {
+import RestaurantCard from '../components/RestaurantCard'
+import { setData } from '../api/foodApi'
+import { useState } from 'react'
+import { useRoute } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context'
+export default function SearchScreen() {
+    const restaurantName = useRoute().params.restaurantName;
+    const [restaurants, setRestaurant] = useState([]);
+    console.log(restaurantName);
+    useEffect(() => {
+        const fetchData = async () => {
+            setData(`restaurantDetailsByName/${restaurantName}`, setRestaurant);
+        };
 
+        fetchData();
+    }, []);
     return (
-        <View className="flex-1 items-center justify-center">
-            <Image source={require('../assets/images/delivery.gif')} className="h-80 w-80"></Image>
-        </View >
+        <SafeAreaView className="bg-white">
+            <SearchBar />
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                    padding: 15
+                }}
+                className="overflow-visible mt-3">
+                {
+                    restaurants.map((item, index) => {
+                        return (
+                            <RestaurantCard
+                                key={index}
+                                item={item}
+                            />
+                        )
+                    })
+                }
+            </ScrollView>
+
+        </SafeAreaView>
     )
 }

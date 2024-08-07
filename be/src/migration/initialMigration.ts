@@ -38,8 +38,6 @@ export class InitialMigration1627618836793 implements MigrationInterface {
             \`name\` varchar(255) NOT NULL,
             \`image\` varchar(255) NOT NULL,
             \`description\` text NOT NULL,
-            \`lng\` double DEFAULT NULL,
-            \`lat\` double DEFAULT NULL,
             \`address\` varchar(255) DEFAULT NULL,
             \`stars\` float DEFAULT NULL,
             \`reviews\` varchar(255) DEFAULT NULL,

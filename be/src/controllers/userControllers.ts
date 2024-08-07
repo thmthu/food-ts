@@ -4,14 +4,15 @@ import { BillSchema, UserSchema, BillDetailSchema } from '../entity';
 
 const login = async (req: Request, res: Response): Promise<Response> => {
     try {
-        console.log(req.body);
         const { email, password } = req.body;
+        console.log("jjoooooooooooo", email, password);
         const dataSource = await AppDataSourceSingleton.getInstance();
         const userRepository = dataSource.getRepository(UserSchema);
         const user = await userRepository.findOneBy({ email, password });
         if (!user) {
             return res.status(404).json({ message: 'Invalid credentials' });
         }
+
         return res.status(200).json({ success: true });
     } catch (error) {
         console.error(error);
@@ -28,7 +29,7 @@ const signup = async (req: Request, res: Response): Promise<Response> => {
         if (checkUser) {
             return res.status(400).json({ message: 'Email or username already exists' });
         }
-        const newUser = await userRepository.create({
+        const newUser = userRepository.create({
             email,
             password,
             username: user,
@@ -40,7 +41,7 @@ const signup = async (req: Request, res: Response): Promise<Response> => {
     }
     catch (error) {
         console.error(error);
-        return res.status(500).send('Server error');
+        return res.status(500).send('Server error').json({ message: 'Server error' });
     }
 };
 
