@@ -1,5 +1,4 @@
-// src/models/Restaurant.ts
-import { Featured } from './Featured'; // Adjust the import path as necessary
+import { Featured } from './Featured';
 
 export interface Restaurant {
     id: number;
@@ -11,5 +10,5 @@ export interface Restaurant {
     reviews?: string;
     category?: string;
     featured_id?: number;
-    featured?: Featured; // Add the featured property
+    featured?: Featured;
 }

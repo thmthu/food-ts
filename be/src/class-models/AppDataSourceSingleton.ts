@@ -14,6 +14,7 @@ export class AppDataSourceSingleton {
             AppDataSourceSingleton.instance = AppDataSource;
             await AppDataSourceSingleton.instance.initialize()
                 .then(() => {
+
                     console.log("Data Source has been initialized!");
                 })
                 .catch((err) => {

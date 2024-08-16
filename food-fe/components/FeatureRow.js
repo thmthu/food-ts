@@ -10,7 +10,7 @@ export default function FeatureRow(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            setData(`featuredRestaurants/${featuredId}`, setRestaurant);
+            setData(`featured-restaurants/${featuredId}`, setRestaurant);
         };
 
         fetchData();

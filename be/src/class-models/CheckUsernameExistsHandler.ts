@@ -1,6 +1,6 @@
 import UserHandler from './UserHandler';
 import { Repository } from 'typeorm';
-import { User } from '../entity-models/User';
+import { User } from '../interface/User';
 import { Response } from 'express';
 
 class CheckUsernameExistsHandler extends UserHandler {

@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -6,6 +7,8 @@ import apiRoutes from './routes/api'
 import manageRoutes from './routes/manage'
 import configViewEngine from './config/viewEngine';
 import { config } from 'dotenv';
+
+
 
 
 config();

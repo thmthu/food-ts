@@ -12,7 +12,7 @@ export default function SearchScreen() {
     console.log(restaurantName);
     useEffect(() => {
         const fetchData = async () => {
-            setData(`restaurantDetailsByName/${restaurantName}`, setRestaurant);
+            setData(`restaurant-detail-by-name/${restaurantName}`, setRestaurant);
         };
 
         fetchData();

@@ -1,5 +1,5 @@
 import { EntitySchema } from "typeorm";
-import { Restaurant } from "../entity-models/Restaurant"; // Adjust the import path as necessary
+import { Restaurant } from "../interface/Restaurant"; // Adjust the import path as necessary
 
 export const RestaurantSchema = new EntitySchema<Restaurant>({
     name: "Restaurant",
@@ -51,7 +51,7 @@ export const RestaurantSchema = new EntitySchema<Restaurant>({
             joinColumn: { name: "featured_id" },
             cascade: true,
             onDelete: "SET NULL",
-            inverseSide: "restaurants", // Inverse side of the relationship
+            inverseSide: "restaurants",
 
         },
     },

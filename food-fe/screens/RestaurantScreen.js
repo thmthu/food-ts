@@ -27,13 +27,14 @@ export default function RestaurantScreen() {
 
     useEffect(() => {
         setData(`${id}`, setRes);
-        setData(`restaurantDetails/${id}`, setDishes);
+        setData(`dish-restaurant/${id}`, setDishes);
 
     }, []);
 
     return (
         <View className='flex-1'>
             <StatusBar barStyle="light-content" />
+
             <CartIcon />
             <ScrollView showsVerticalScrollIndicator={false}
                 contentContainerStyle={{

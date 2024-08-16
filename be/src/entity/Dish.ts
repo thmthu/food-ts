@@ -1,5 +1,5 @@
 import { EntitySchema } from "typeorm";
-import { Dish } from "../entity-models/Dish"; // Adjust the import path as necessary
+import { Dish } from "../interface/Dish"; // Adjust the import path as necessary
 
 export const DishSchema = new EntitySchema<Dish>({
     name: "Dish",

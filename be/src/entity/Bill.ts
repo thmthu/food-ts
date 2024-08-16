@@ -1,5 +1,5 @@
 import { EntitySchema } from "typeorm";
-import { Bill } from "../entity-models/Bill"; // Adjust the import path as necessary
+import { Bill } from "../interface/Bill"; // Adjust the import path as necessary
 
 export const BillSchema = new EntitySchema<Bill>({
     name: "Bill",
