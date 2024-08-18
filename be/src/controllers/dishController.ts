@@ -4,7 +4,7 @@ import { Service } from 'typedi';
 import { Dish } from '../interface';
 
 @Service()
-export class dishController {
+class dishController {
     constructor(private service: DishService) { };
     async getDataByIdRestaurant(req: Request, res: Response) {
         try {
@@ -20,6 +20,6 @@ export class dishController {
             res.status(500).send('Server error');
         }
     };
-
-
 }
+
+export { dishController }

@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 import { Restaurant } from '../interface';
 import { RestaurantService } from '../services';
 
-///raw test for option template
-export class restaurantController {
+import { Service } from "typedi";
+
+@Service()
+class restaurantController {
     constructor(private service: RestaurantService) { };
     async getDataByIdRestaurant(req: Request, res: Response) {
         try {
@@ -55,3 +57,4 @@ export class restaurantController {
         }
     }
 }
+export { restaurantController }

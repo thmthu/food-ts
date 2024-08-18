@@ -1,13 +1,16 @@
-import { featuredService } from "../services/restaurant";
 import { Request, Response } from 'express';
 import { Service } from 'typedi';
+import { FeatureService } from '../services';
 
 @Service()
-export class featuredController {
-    constructor(private service: featuredService) { };
+class featuredController {
+    constructor(private service: FeatureService) { };
     async getAllFeature(req: Request, res: Response) {
         try {
+            console.log("1111");
             const feature = await this.service.getAll();
+            console.log("hiiiiiiii", feature)
+
             res.json(feature);
 
         }
@@ -17,3 +20,4 @@ export class featuredController {
         }
     }
 }
+export { featuredController }

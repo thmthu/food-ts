@@ -7,7 +7,7 @@ import { selectRestaurant } from '../slices/restaurantSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromCart, selectItems } from '../slices/cartSlice'
 import { selectEmail } from '../slices/emailSlice'
-
+import { config } from '../config/baseURL'
 export default function CartScreen() {
     const navi = useNavigation();
     const res = useSelector(state => selectRestaurant(state));
@@ -31,7 +31,7 @@ export default function CartScreen() {
         };
 
         try {
-            const response = await fetch('http://172.20.240.1:3000/bill', {
+            const response = await fetch(`${config.apiUrl}bill`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,7 +1,9 @@
 import { DataSource } from 'typeorm';
 import { AppDataSource } from '../ormconfig';
+import { Service } from 'typedi';
 
-export class AppDataSourceSingleton {
+@Service()
+class AppDataSourceSingleton {
     private static instance: DataSource;
 
     private constructor() { }
@@ -24,3 +26,4 @@ export class AppDataSourceSingleton {
         return AppDataSourceSingleton.instance;
     }
 }
+export { AppDataSourceSingleton }

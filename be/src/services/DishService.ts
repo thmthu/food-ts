@@ -2,8 +2,10 @@ import { IDish } from "../interface/IDish";
 import { Repository, DataSource } from "typeorm";
 import { Dish } from "../interface";
 import { DishSchema } from "../entity";
+import { Service } from "typedi";
 
-export class DishService implements IDish {
+@Service()
+class DishService implements IDish {
     repository: Repository<Dish>;
     constructor(protected dataSource: DataSource) {
         this.repository = dataSource.getRepository(DishSchema);
@@ -18,3 +20,4 @@ export class DishService implements IDish {
         return restaurants
     }
 }
+export { DishService }

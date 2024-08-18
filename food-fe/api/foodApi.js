@@ -1,15 +1,14 @@
 import { config } from "../config/baseURL";
-
 export const fetchData = async (type) => {
     try {
-        const baseURL = config.apiUrl
+        const baseURL = config.apiUrl;
         const response = await fetch(`${baseURL}api/restaurants/${type}`);
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
         }
         return await response.json();
     } catch (error) {
-        console.error('Fetch error:', error);
+        console.error('Fetch error:', error.message, error.stack);
         throw error;
     }
 }

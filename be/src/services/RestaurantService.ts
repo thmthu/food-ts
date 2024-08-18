@@ -2,8 +2,10 @@ import { IRestaurant } from "../interface/IRestaurant";
 import { Repository, DataSource } from "typeorm";
 import { Restaurant } from "../interface";
 import { RestaurantSchema } from "../entity";
+import { Service } from "typedi";
 
-export class RestaurantService implements IRestaurant {
+@Service()
+class RestaurantService implements IRestaurant {
     repository: Repository<Restaurant>;
     constructor(protected dataSource: DataSource) {
         this.repository = dataSource.getRepository(RestaurantSchema);
@@ -28,3 +30,4 @@ export class RestaurantService implements IRestaurant {
     }
 
 }
+export { RestaurantService }
