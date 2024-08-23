@@ -2,15 +2,14 @@ import { IFeature } from "../interface/IFeature";
 import { Repository, DataSource } from "typeorm";
 import { Featured } from "../interface";
 import { FeaturedSchema } from "../entity";
-import { Service } from 'typedi';
+import { Service, Inject } from 'typedi';
 
 @Service()
 class FeatureService implements IFeature {
-    repository: Repository<Featured>;
-
-    constructor(private dataSource: DataSource) {
-        this.repository = this.dataSource.getRepository(FeaturedSchema);
-    }
+    constructor(
+        @Inject(() => DataSource) private dataSource: DataSource,
+        @Inject('FeatureRepository') private repository: Repository<Featured>
+    ) { }
 
     async getAll() {
         return await this.repository.find();

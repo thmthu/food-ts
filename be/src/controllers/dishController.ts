@@ -4,7 +4,7 @@ import { Service } from 'typedi';
 import { Dish } from '../interface';
 
 @Service()
-class dishController {
+class DishController {
     constructor(private service: DishService) { };
     async getDataByIdRestaurant(req: Request, res: Response) {
         try {
@@ -22,4 +22,4 @@ class dishController {
     };
 }
 
-export { dishController }
+export { DishController }

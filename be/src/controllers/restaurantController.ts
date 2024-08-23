@@ -5,7 +5,7 @@ import { RestaurantService } from '../services';
 import { Service } from "typedi";
 
 @Service()
-class restaurantController {
+class RestaurantController {
     constructor(private service: RestaurantService) { };
     async getDataByIdRestaurant(req: Request, res: Response) {
         try {
@@ -57,4 +57,4 @@ class restaurantController {
         }
     }
 }
-export { restaurantController }
+export { RestaurantController }

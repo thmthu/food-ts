@@ -3,7 +3,7 @@ import { Service } from 'typedi';
 import { FeatureService } from '../services';
 
 @Service()
-class featuredController {
+class FeaturedController {
     constructor(private service: FeatureService) { };
     async getAllFeature(req: Request, res: Response) {
         try {
@@ -20,4 +20,4 @@ class featuredController {
         }
     }
 }
-export { featuredController }
+export { FeaturedController }

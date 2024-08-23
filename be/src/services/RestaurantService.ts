@@ -2,16 +2,17 @@ import { IRestaurant } from "../interface/IRestaurant";
 import { Repository, DataSource } from "typeorm";
 import { Restaurant } from "../interface";
 import { RestaurantSchema } from "../entity";
-import { Service } from "typedi";
+import { Service, Inject } from "typedi";
 
 @Service()
 class RestaurantService implements IRestaurant {
-    repository: Repository<Restaurant>;
-    constructor(protected dataSource: DataSource) {
-        this.repository = dataSource.getRepository(RestaurantSchema);
-        //cái này có gọi là phụ thuộc và restaurantSchema không? hình như có.... nhưng cái này đâu cần initiate => kệ?????
-        //Nếu muốn đổi kiểu schema thì vào mỗi constructor này đổi cũng dc
-    }
+    constructor(
+        @Inject(() => DataSource) private dataSource: DataSource,
+        @Inject('RestaurantRepository') private repository: Repository<Restaurant>
+    ) { }
+    //cái này có gọi là phụ thuộc và restaurantSchema không? hình như có.... nhưng cái này đâu cần initiate => kệ?????
+    //Nếu muốn đổi kiểu schema thì vào mỗi constructor này đổi cũng dc
+
     async getAll() {
         return await this.repository.find();
     };

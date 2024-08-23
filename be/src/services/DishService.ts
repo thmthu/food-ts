@@ -2,14 +2,16 @@ import { IDish } from "../interface/IDish";
 import { Repository, DataSource } from "typeorm";
 import { Dish } from "../interface";
 import { DishSchema } from "../entity";
-import { Service } from "typedi";
+import { Service, Inject } from "typedi";
 
 @Service()
 class DishService implements IDish {
-    repository: Repository<Dish>;
-    constructor(protected dataSource: DataSource) {
-        this.repository = dataSource.getRepository(DishSchema);
-    }
+    constructor(
+        @Inject(() => DataSource) private dataSource: DataSource,
+        @Inject('DishRepository') private repository: Repository<Dish>
+    ) { }
+
+
     async getDataByIdRestaurant(id: number) {
         return await this.repository.findBy({ restaurant_id: id });
     };

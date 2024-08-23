@@ -1,4 +1,3 @@
-export { featuredController } from './featureController'
-export { dishController } from './dishController'
-export { restaurantController } from './restaurantController'
-
+export { FeaturedController } from './FeatureController'
+export { DishController } from './DishController'
+export { RestaurantController } from './RestaurantController'
