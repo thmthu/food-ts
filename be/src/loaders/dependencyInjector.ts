@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 
 export default async ({ ORMConnection, models }: { ORMConnection; models: { name: string; model: any }[] }) => {
     try {
-        // Container.set(DataSource, ORMConnection)
+        Container.set(DataSource, ORMConnection)
         models.forEach(m => {
             Container.set(m.name, m.model);
         });

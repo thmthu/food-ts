@@ -4,8 +4,6 @@ import loader from './loaders';
 
 async function startServer() {
     const app = express();
-
-    console.log('index1')
     await loader({ expressApp: app });
 
     app.listen(process.env.MANAGE_PORT, () => {

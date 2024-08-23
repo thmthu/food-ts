@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { AppDataSource } from '../ormconfig';
+import { AppDataSource } from '../config/ORM';
 import { Service } from 'typedi';
 
 @Service()

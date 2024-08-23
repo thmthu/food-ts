@@ -1,12 +1,12 @@
 import ORMLoader from './orm'
+import dependencyInjector from './dependencyInjector'
 import expressLoader from './express'
 import { DishSchema, RestaurantSchema, FeaturedSchema } from '../entity';
-import dependencyInjector from './dependencyInjector'
 import Container from 'typedi';
 import { DataSource } from 'typeorm';
 export default async ({ expressApp }) => {
     const ORMConnection = await ORMLoader();
-    Container.set(DataSource, ORMConnection)
+    // Container.set(DataSource, ORMConnection)
 
     const DishModel = {
         name: "DishRepository",
