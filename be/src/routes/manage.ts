@@ -8,10 +8,15 @@ export default () => {
     console.log("4", Container.has(DataSource)); // Should print `true`
 
 
-    router.get('/create', pageController.getCreatePage.bind(pageController));
-    router.get('/update', pageController.getUpdatePage.bind(pageController));
-    router.get('/', pageController.getHome.bind(pageController));
-    router.post('/create-restaurant', pageController.createRestaurant.bind(pageController));
+    router.get('/dish/page-create', pageController.getCreatePage.bind(pageController));
+    router.get('/dish/page-update', pageController.getUpdatePage.bind(pageController));
+    router.get('/dish/home', pageController.getHome.bind(pageController));
+    router.get('/dish/page-update/:id', pageController.getUpdatePage.bind(pageController));
+    // router.get('/dish/update',pageController.)
+    router.post('/dish/create', pageController.createOneDish.bind(pageController));
+    router.post('/dish/update', pageController.updateDishByID.bind(pageController));
+
+    router.get('/dish/delete/:id', pageController.deleteDishById.bind(pageController))
     return router
 
 }

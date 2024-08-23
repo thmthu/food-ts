@@ -3,20 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homemmm</title>
+    <title>Edit</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-
 <body>
     <div class="topnav">
-        <a class="active" href="/manage/update-page">Update</a>
-        <a href="/manage/create-page">Create</a>
-        <a href="/manage/home">Home</a>
+        <a href="/manage/dish/page-create">Create</a>
+        <a href="/manage/dish/home">Home</a>
 
     </div>
-    <div> heloooooo</div>
-
-</body>
-
-</html>
+    <div class="form">
+        <form action="/manage/dish/update" method="POST">
+            <fieldset>
+                <legend>Restaurant Information:</legend>
+                <div class="input-group">
+                    <label>Restaurant ID</label>
+                    <input type="text" name="restaurant_id" value="<%=dish.restaurant_id %>">
+                </div>
+                <div class="input-group d-none">
+                    <label> ID</label>
+                    <input type="text" name="id" value="<%=dish.id %>">
+                </div>
+                <div class="input-group">
+                    <label>name</label>
+                    <input type="text" value="<%=dish.name %>" name="name">
+                </div>
+                <div class="input-group">
+                    <label>image</label>
+                    <input type="text" value="<%=dish.image %>" name="image">
+                </div>
+                <div class="input-group">
+                    <label>Description</label>
+                    <input type="text" value="<%=dish.description %>" name="description">
+                </div>
+                <div class="input-group">
+                    <label>price</label>
+                    <input type="text" value="<%=dish.price %>" name="price">
+                </div>
+                <div>
+                    <input type="submit" value="Submit">
+                </div>
+            </fieldset>
+        </form>
+    </div>

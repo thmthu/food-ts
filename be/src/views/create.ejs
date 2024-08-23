@@ -9,12 +9,11 @@
 
 <body>
     <div class="topnav">
-        <a href="/manage/update-page">Update</a>
-        <a href="/manage/create-page" class="active">Create</a>
-        <a href="/manage/home">Home</a>
+        <a href="page-create" class="active">Create</a>
+        <a href="home">Home</a>
     </div>
     <div class="form">
-        <form id="createForm" action="/manage/create-restaurant" method="POST">
+        <form action="/manage/dish/create" method="POST">
             <fieldset>
                 <legend>Restaurant Information:</legend>
                 <div class="input-group">
@@ -44,30 +43,6 @@
                 <div>
                     <input type="submit" value="Submit">
                 </div>
-                <div id="responseMessage"></div> <!-- Div to display the response message -->
             </fieldset>
         </form>
     </div>
-
-    <script>
-        document.getElementById('createForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            const formData = new FormData(this);
-
-            fetch('/manage/create-restaurant', {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('responseMessage').innerText = 'Success';
-                })
-                .catch(error => {
-                    document.getElementById('responseMessage').innerText = 'An error occurred: ' + error;
-                });
-        });
-    </script>
-</body>
-
-</html>

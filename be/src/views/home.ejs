@@ -27,44 +27,53 @@
 
 <body>
     <div class="topnav">
-        <a class="active" href="/manage/update-page">Update</a>
-        <a href="/manage/create-page">Create</a>
-        <a href="/manage/home">Home</a>
+        <a href="page-create">Create</a>
+        <a href="home" class="active">Home</a>
 
 
     </div>
-    <h2>Hoverable Table</h2>
 
-    <p>Move the mouse over the table rows to see the effect.</p>
 
     <table>
         <tr>
-            <th>Email</th>
+            <th>ID</th>
             <th>Name</th>
-            <th>City</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Restaurant id</th>
             <th>Action</th>
 
+
         </tr>
-        <% for(var i=0; i<users.length; i++) {%>
+        <% for(let i=0;i<listDish.length;i++) {%>
             <tr>
-
-                <th>
-                    <%= users[i].email%>
-                </th>
-                <th>
-                    <%= users[i].name%>
-                </th>
-                <th>
-                    <%= users[i].city%>
-                </th>
-                <th>
-                    <a href="/update/<%= users[i].id%>">Edit</a>
-                    <button> Delete</button>
-
-                </th>
+                <td>
+                    <%= listDish[i].id %>
+                </td>
+                <td>
+                    <%= listDish[i].name %>
+                </td>
+                <td>
+                    <%= listDish[i].description %>
+                </td>
+                <td>
+                    <%= listDish[i].price %>
+                </td>
+                <td>
+                    <%= listDish[i].image %>
+                </td>
+                <td>
+                    <%= listDish[i].restaurant_id %>
+                </td>
+                <td>
+                    <a href="delete/<%= listDish[i].id%> ">Delete</a>
+                    <a href="page-update/<%= listDish[i].id%> ">update</a>
+                </td>
 
             </tr>
-            <% } %>
+            <%} %>
+
 
 
     </table>

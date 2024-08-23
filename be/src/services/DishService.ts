@@ -21,5 +21,30 @@ class DishService implements IDish {
             .getMany();
         return restaurants
     }
+    async createOneDish({ id, name, description, price, image, restaurant_id }) {
+        const dish = this.repository.create({
+            id,
+            name,
+            description,
+            price,
+            image,
+            restaurant_id
+        });
+        await this.repository.save(dish);
+    }
+    async getAllDish(): Promise<Dish[]> {
+        return await this.repository.find();
+    }
+    deleteById(id: number) {
+        this.repository.delete(id)
+    }
+    async getDataById(id: number): Promise<Dish | undefined> {
+        return await this.repository.findOne({ where: { id } });
+    }
+    async updateById(id: number, data: Partial<Dish>) {
+        await this.repository.update(id, data);
+
+
+    }
 }
 export { DishService }
