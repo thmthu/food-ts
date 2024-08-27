@@ -14,11 +14,11 @@ const seedDatabase = async () => {
     ]);
 
     await dataSource.getRepository(UserSchema).save([
-        { username: 'mitu', email: 'mitu@gmail.com', address: '123 Main St', password: 'mitu' },
-        { username: 'abc', email: 'abc@gmail.com', address: '123 Main St', password: 'abc' },
-        { username: 'hihi', email: 'hihi@gmail.com', address: '123 Main St', password: 'hihi' },
-        { username: '123', email: '123@gmail.com', address: '123 Main St', password: '123' },
-        { username: 'ok', email: 'ok@gmail.com', address: '123 Main St', password: 'ok' }
+        { name: 'mitu', email: 'mitu@gmail.com', address: '123 Main St', password: 'mitu' },
+        { name: 'abc', email: 'abc@gmail.com', address: '123 Main St', password: 'abc' },
+        { name: 'hihi', email: 'hihi@gmail.com', address: '123 Main St', password: 'hihi' },
+        { name: '123', email: '123@gmail.com', address: '123 Main St', password: '123' },
+        { name: 'ok', email: 'ok@gmail.com', address: '123 Main St', password: 'ok' }
 
 
 

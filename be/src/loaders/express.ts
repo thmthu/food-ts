@@ -9,7 +9,6 @@ import { DataSource } from 'typeorm';
 import apiRoutes from '../routes/api';
 import manageRoutes from '../routes/manage'
 export default ({ app }: { app: express.Application }) => {
-    console.log("loader 1")
     app.use(cors());
     app.use(morgan('dev'));
     app.use(express.json());

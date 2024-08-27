@@ -7,10 +7,7 @@ class FeaturedController {
     constructor(private service: FeatureService) { };
     async getAllFeature(req: Request, res: Response) {
         try {
-            console.log("1111");
             const feature = await this.service.getAll();
-            console.log("hiiiiiiii", feature)
-
             res.json(feature);
 
         }

@@ -1,9 +1,8 @@
 import ORMLoader from './orm'
 import dependencyInjector from './dependencyInjector'
 import expressLoader from './express'
-import { DishSchema, RestaurantSchema, FeaturedSchema } from '../entity';
-import Container from 'typedi';
-import { DataSource } from 'typeorm';
+import { DishSchema, RestaurantSchema, FeaturedSchema, UserSchema } from '../entity';
+
 export default async ({ expressApp }) => {
     const ORMConnection = await ORMLoader();
     // Container.set(DataSource, ORMConnection)
@@ -20,7 +19,11 @@ export default async ({ expressApp }) => {
         name: "FeatureRepository",
         model: ORMConnection.getRepository(FeaturedSchema)
     }
-    await dependencyInjector({ ORMConnection, models: [DishModel, RestaurantModel, FeatureModel] })
+    const UserModel = {
+        name: "UserRepository",
+        model: ORMConnection.getRepository(UserSchema)
+    }
+    await dependencyInjector({ ORMConnection, models: [DishModel, RestaurantModel, FeatureModel, UserModel] })
     expressLoader({ app: expressApp });
 
 }

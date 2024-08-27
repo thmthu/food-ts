@@ -1,16 +1,16 @@
 import { EntitySchema } from "typeorm";
-import { User } from "../interface/User"; // Adjust the import path as necessary
+import { IUser } from "../interface/User"; // Adjust the import path as necessary
 
-export const UserSchema = new EntitySchema<User>({
+export const UserSchema = new EntitySchema<IUser>({
     name: "User",
     tableName: "Users",
     columns: {
-        id: {
+        _id: {
             type: Number,
             primary: true,
             generated: "increment",
         },
-        username: {
+        name: {
             type: String,
             length: 255,
             nullable: false,
@@ -30,11 +30,17 @@ export const UserSchema = new EntitySchema<User>({
             length: 255,
             nullable: true,
         },
+        salt: {
+            type: String,
+            length: 255,
+            nullable: true,
+
+        }
     },
     indices: [
         {
             name: "IDX_USERNAME",
-            columns: ["username"],
+            columns: ["name"],
             unique: true,
         },
         {

@@ -1,6 +1,6 @@
 import express from 'express';
 import { Container } from 'typedi';
-import { PageController } from '../controllers/pageController';
+import { PageController } from '../controllers/PageController';
 import { DataSource } from 'typeorm';
 export default () => {
     const router = express.Router();
