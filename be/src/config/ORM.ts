@@ -1,4 +1,4 @@
-import { UserSchema, BillSchema, BillDetailSchema, DishSchema, FeaturedSchema, RestaurantSchema } from '../entity';
+import { UserSchema, BillSchema, BillDetailSchema, DishSchema, FeaturedSchema, RestaurantSchema, TokenSchema } from '../entity';
 import { config } from 'dotenv';
 import { DataSource } from 'typeorm';
 
@@ -31,7 +31,7 @@ export const AppDataSource = new DataSource({
     database: database,
     synchronize: true,
     logging: false,
-    entities: [UserSchema, BillSchema, BillDetailSchema, DishSchema, FeaturedSchema, RestaurantSchema],
+    entities: [UserSchema, BillSchema, BillDetailSchema, DishSchema, FeaturedSchema, RestaurantSchema, TokenSchema],
     migrationsTableName: "custom_migration_table",
     migrations: ["src/migration/**/*.ts"],
     subscribers: [],

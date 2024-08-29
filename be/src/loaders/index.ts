@@ -1,7 +1,7 @@
 import ORMLoader from './orm'
 import dependencyInjector from './dependencyInjector'
 import expressLoader from './express'
-import { DishSchema, RestaurantSchema, FeaturedSchema, UserSchema } from '../entity';
+import { DishSchema, RestaurantSchema, FeaturedSchema, UserSchema, TokenSchema } from '../entity';
 
 export default async ({ expressApp }) => {
     const ORMConnection = await ORMLoader();
@@ -23,7 +23,11 @@ export default async ({ expressApp }) => {
         name: "UserRepository",
         model: ORMConnection.getRepository(UserSchema)
     }
-    await dependencyInjector({ ORMConnection, models: [DishModel, RestaurantModel, FeatureModel, UserModel] })
+    const TokenModel = {
+        name: "TokenRepository",
+        model: ORMConnection.getRepository(TokenSchema)
+    }
+    await dependencyInjector({ ORMConnection, models: [DishModel, RestaurantModel, FeatureModel, UserModel, TokenModel] })
     expressLoader({ app: expressApp });
 
 }

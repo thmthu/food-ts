@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppDataSourceSingleton } from '../class-models/AppDataSourceSingleton';
 import { BillSchema, UserSchema, BillDetailSchema } from '../entity';
-import AuthService from '../services/AuthService';
 import { IUser, IUserInputDTO } from '../interface/User';
 import { Service } from 'typedi';
+import { AuthService } from '../services';
 @Service()
 class UserController {
     constructor(private service: AuthService) { }
     public async SignUp(req: Request, res: Response, next: NextFunction) {
         try {
-            const { user, token } = await this.service.SignUp(req.body as IUserInputDTO);
-            return res.json({ user, token }).status(200);
+            const { user } = await this.service.SignUp(req.body as IUserInputDTO);
+            return res.json({ user }).status(200);
         } catch (e) {
             return next(e);
         }
@@ -18,8 +18,8 @@ class UserController {
     public async SignIn(req: Request, res: Response, next: NextFunction) {
         const { email, password } = req.body;
         try {
-            const { user, token } = await this.service.SignIn(email, password);
-            return res.json({ user, token }).status(200);
+            const { user, token, refreshToken } = await this.service.SignIn(email, password);
+            return res.json({ user, token, refreshToken }).status(200);
         } catch (e) {
             return next(e);
         }

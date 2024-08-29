@@ -4,28 +4,31 @@ import { randomBytes } from 'crypto';
 import argon2 from 'argon2';
 import { Repository } from 'typeorm';
 import jwt from 'jsonwebtoken';
-import { key } from '../config/jwt'
+import { key, refreshKey } from '../config/jwt'
+import { TokenService } from './TokenService';
 
 @Service()
-export default class AuthService {
+class AuthService {
     constructor(
         @Inject('UserRepository') private UserRepository: Repository<IUser>
     ) { }
-    private generateToken(user) {
+    public generateToken(user, key: string, days?: number) {
         const today = new Date();
         const exp = new Date(today);
-        exp.setDate(today.getDate() + 60);
+        const expirationDays = days !== undefined ? days : 0;
+        exp.setSeconds(today.getSeconds() + (expirationDays * 24 * 60 * 60) + (expirationDays === 0 ? 120 : 0));
+
         return jwt.sign(
             {
                 _id: user._id,
                 name: user.name,
-                exp: exp.getTime() / 1000,
+                exp: Math.floor(exp.getTime() / 1000),  // exp should be in seconds
             },
             key
         );
     }
 
-    public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser; token: string }> {
+    public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser }> {
         const salt = randomBytes(32);
         const hashedPassword = await argon2.hash(userInputDTO.password, { salt });
 
@@ -35,27 +38,30 @@ export default class AuthService {
             password: hashedPassword,
         });
         const user = await this.UserRepository.save(userRecord);
-        const token = this.generateToken(userRecord);
-
+        // const token = this.generateToken(userRecord, key);
+        // const refreshToken = this.generateToken(userRecord, refreshKey, 30)
         if (!userRecord) {
             throw new Error('User cannot be created');
         }
         Reflect.deleteProperty(user, 'password');
         Reflect.deleteProperty(user, 'salt');
-        return { user, token };
+        return { user };
     } catch(e) {
         console.log(e);
         throw e;
     }
 
-    public async SignIn(email: string, password: string): Promise<{ user: IUser; token: string }> {
+    public async SignIn(email: string, password: string): Promise<{ user: IUser; token: string, refreshToken: string }> {
         const userRecord = await this.UserRepository.findOneBy({ email: email });
         if (!userRecord) {
             throw new Error('User not registered');
         }
         const validPassword = await argon2.verify(userRecord.password, password);
         if (validPassword) {
-            const token = await this.generateToken(userRecord);
+            const token = this.generateToken(userRecord, key);
+            const refreshToken = this.generateToken(userRecord, refreshKey, 30)
+            const id: Number = parseInt(userRecord._id)
+            await Container.get(TokenService).insertTokenById(id, refreshToken)
             const user: IUser = {
                 _id: userRecord._id,
                 name: userRecord.name,
@@ -68,7 +74,7 @@ export default class AuthService {
             Reflect.deleteProperty(user, 'password');
             Reflect.deleteProperty(user, 'salt');
 
-            return { user, token };
+            return { user, token, refreshToken };
         } else {
             throw new Error('Invalid Password');
         }
@@ -77,4 +83,4 @@ export default class AuthService {
 
 }
 
-
+export { AuthService }

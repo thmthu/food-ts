@@ -71,7 +71,21 @@ export class InitialMigration1627618836793 implements MigrationInterface {
             CONSTRAINT \`FK_6cfe48897f30f604e1546da8b78\` FOREIGN KEY (\`dish_id\`) REFERENCES \`Dishes\` (\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION,
             CONSTRAINT \`FK_9c910b9c0893eaca7803c744a5b\` FOREIGN KEY (\`bill_id\`) REFERENCES \`Bills\` (\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
         ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1`);
+        await queryRunner.query(`CREATE TABLE \`Tokens\` (
+                \`id\` int NOT NULL AUTO_INCREMENT,
+                \`refreshToken\` varchar(255) NOT NULL,
+                \`expireAt\` datetime,
+                \`createAt\` datetime,
+                \`invokeAt\` datetime,
+                \`revoked\` boolean NOT NULL DEFAULT false,
+                \`ipAddress\` varchar(45) DEFAULT NULL,
+                \`userAgent\` varchar(255) DEFAULT NULL,
+                \`idUser\` int NOT NULL,
+                PRIMARY KEY (\`id\`),
+                CONSTRAINT \`FK_User\` FOREIGN KEY (\`idUser\`) REFERENCES \`Users\` (\`id\`) ON DELETE CASCADE ON UPDATE NO ACTION
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
     }
+
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`DROP TABLE \`BillDetails\``);
@@ -81,5 +95,7 @@ export class InitialMigration1627618836793 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE \`custom_migration_table\``);
         await queryRunner.query(`DROP TABLE \`Users\``);
         await queryRunner.query(`DROP TABLE \`Featured\``);
+        await queryRunner.query(`DROP TABLE \`Tokens\``);
+
     }
 }

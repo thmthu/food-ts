@@ -2,7 +2,7 @@ import express from 'express';
 import { bill, UserController } from '../controllers/UserControllers';
 import { DishController, RestaurantController, FeaturedController } from '../controllers';
 import { celebrate, Joi } from 'celebrate';
-
+import { isAuth, checkRefreshToken } from '../middlewares';
 import { Container } from 'typedi';
 export default () => {
     const router = express.Router();
@@ -12,10 +12,12 @@ export default () => {
     const user = Container.get(UserController)
 
     router.get('/restaurants/featured', feature.getAllFeature.bind(feature));
+    router.post('/refresh-token', checkRefreshToken);
+
     router.get('/restaurants/restaurant-detail/:id', restaurant.getDataByIdRestaurant.bind(restaurant));
     router.get('/restaurants/featured-restaurants/:id', restaurant.getRestaurantByFeatured.bind(restaurant));
-    router.get('/restaurants/restaurant-detail-by-name/:name', restaurant.getRestaurantByName.bind(restaurant));
-    router.get('/restaurants/dish-restaurant/:id', dish.getDataByIdRestaurant.bind(dish));
+    router.get('/restaurants/restaurant-detail-by-name/:name', isAuth, restaurant.getRestaurantByName.bind(restaurant));
+    router.get('/restaurants/dish-restaurant/:id', isAuth, dish.getDataByIdRestaurant.bind(dish));
 
     router.post('/users/signin', celebrate({
         body: Joi.object({

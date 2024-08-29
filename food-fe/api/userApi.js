@@ -1,7 +1,7 @@
 import { config } from "../config/baseURL";
 export const loginUser = async (email, password) => {
     try {
-        const response = await fetch(`${config.apiUrl}api/users/sigin`, {
+        const response = await fetch(`${config.apiUrl}api/users/signin`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
