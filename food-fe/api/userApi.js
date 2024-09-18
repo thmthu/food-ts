@@ -1,4 +1,5 @@
 import { config } from "../config/baseURL";
+
 export const loginUser = async (email, password) => {
     try {
         const response = await fetch(`${config.apiUrl}api/users/signin`, {
@@ -10,9 +11,11 @@ export const loginUser = async (email, password) => {
         });
 
         if (response.ok) {
-            return true;
+            const data = await response.json();
+            const { token, refreshToken } = data;
+            return { token, refreshToken };
         } else {
-            return false;
+            return null;
         }
     } catch (error) {
         throw error;

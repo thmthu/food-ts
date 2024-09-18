@@ -8,6 +8,8 @@ import { setEmail } from '../slices/emailSlice';
 import { useDispatch } from 'react-redux';
 import { config } from "../config/baseURL";
 import { loginUser } from '../api/userApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function LoginScreen() {
     const navi = useNavigation();
@@ -23,17 +25,24 @@ export default function LoginScreen() {
     }
     const handleSubmit = async (values) => {
         try {
-            if (values.email == "" || values.password == "") {
+            if (values.email === "" || values.password === "") {
                 handlleMessage("Please fill all fields", true);
                 return;
             }
+
             const response = await loginUser(values.email, values.password);
+
             if (response) {
+                const { token, refreshToken } = response;
+
+                // Store tokens in AsyncStorage
+                await AsyncStorage.setItem('accessToken', token);
+                await AsyncStorage.setItem('refreshToken', refreshToken);
+
                 handlleMessage("Login successful", true);
                 dispatch(setEmail(values.email));
                 navi.navigate('Home', { email: values.email });
                 handlleMessage("", true);
-
             } else {
                 handlleMessage("Login failed. Username or password is incorrect", true);
                 console.log('Request failed');
@@ -41,7 +50,7 @@ export default function LoginScreen() {
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return (
         <Formik

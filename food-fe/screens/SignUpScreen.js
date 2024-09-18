@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import TextInputCustom from '../components/TextInputCustom';
 import { useNavigation } from '@react-navigation/native';
 import { registerUser } from '../api/userApi';
+
 export default function SignUpScreen() {
     const navi = useNavigation();
 
@@ -17,28 +18,27 @@ export default function SignUpScreen() {
 
     const handleSubmit = async (values) => {
         try {
-            if (values.email == "" || values.password == "" || values.user == "" || values.address == "") {
+            if (values.email == "" || values.password == "" || values.name == "" || values.address == "") {
                 handlleMessage("Please fill all fields", true);
                 return;
             }
+            console.log(values);
             const data = await registerUser(values);
             handlleMessage(data.message, true);
-
-        }
-        catch (error) {
+        } catch (error) {
             console.error('Error2:', error);
         }
     }
+
     return (
         <Formik
             initialValues={{
-                user: '',
+                name: '',
                 email: '',
                 password: '',
                 address: ''
             }}
             onSubmit={handleSubmit}
-
         >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -46,16 +46,15 @@ export default function SignUpScreen() {
                         <Text style={{ color: "rgba(251, 146, 60, 20)" }} className="font-extrabold text-center text-3xl my-3"> SIGN UP </Text>
                         <TextInputCustom
                             style={{ marginBottom: 15 }}
-                            label="user"
+                            label="name"
                             icon="person"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             placeholder="Asley Smith"
                             placeholderTextColor="gray"
-                            onChangeText={handleChange('user')}
-                            onBlur={handleBlur('user')}
-                            value={values.user}
-
+                            onChangeText={handleChange('name')}
+                            onBlur={handleBlur('name')}
+                            value={values.name}
                         />
                         <TextInputCustom
                             style={{ marginBottom: 15 }}
@@ -80,53 +79,34 @@ export default function SignUpScreen() {
                             onChangeText={handleChange('address')}
                             onBlur={handleBlur('address')}
                             value={values.address}
-
                         />
                         <TextInputCustom
                             style={{ marginBottom: 15 }}
                             label="password"
-                            // icon="lock-closed"
-                            handleChange={handleChange}
-                            handleBlur={handleBlur}
-                            placeholder="*******"
-                            placeholderTextColor="gray"
-                            onchangeText={handleChange('password')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
-                            secureTextEntry={hidePassword}
-                            hidePassword={hidePassword}
-                            setHidePassword={setHidePassword}
-                            isPassword={true}
-
-                        />
-                        <TextInputCustom
-                            style={{ marginBottom: 15 }}
-                            label="Password"
                             icon="lock-closed"
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             placeholder="*******"
                             placeholderTextColor="gray"
-                            onchangeText={handleChange('password')}
+                            onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
                             value={values.password}
                             secureTextEntry={hidePassword}
                             hidePassword={hidePassword}
                             setHidePassword={setHidePassword}
                             isPassword={true}
-
                         />
-                        {isShowMess && (<View className="flex-row justify-center my-2">
-                            <Text className="text-red-500">{message}</Text>
-                        </View>)}
-
-
+                        {isShowMess && (
+                            <View className="flex-row justify-center my-2">
+                                <Text className="text-red-500">{message}</Text>
+                            </View>
+                        )}
                         <View className="mx-40 rounded-lg">
-                            <Button title="Submit"
+                            <Button
+                                title="Submit"
                                 onPress={handleSubmit}
-                                color="rgba(251, 146, 60, 20)">
-
-                            </Button>
+                                color="rgba(251, 146, 60, 20)"
+                            />
                         </View>
                         <View className="flex-row justify-center mt-3">
                             <TouchableOpacity onPress={() => navi.navigate('LogIn')}>
@@ -135,9 +115,7 @@ export default function SignUpScreen() {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-
-            )
-            }
-        </Formik >
+            )}
+        </Formik>
     );
 }

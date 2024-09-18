@@ -8,5 +8,5 @@ export { Restaurant } from './Restaurant';
 export { IRepository } from './IRepository';
 export { JwtPayload } from './JwtPayload';
 export { Token } from './Token';
-
+export { ServerToClientEvents, ClientToServerEvents, InterServerEvents, SocketData } from './Socket'
 

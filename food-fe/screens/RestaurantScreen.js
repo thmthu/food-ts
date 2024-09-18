@@ -26,7 +26,7 @@ export default function RestaurantScreen() {
     const [res, setRes] = useState(null); // Set initial state to null
 
     useEffect(() => {
-        setData(`${id}`, setRes);
+        setData(`restaurant-detail/${id}`, setRes);
         setData(`dish-restaurant/${id}`, setDishes);
 
     }, []);

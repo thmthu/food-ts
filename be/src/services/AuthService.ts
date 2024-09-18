@@ -12,22 +12,20 @@ class AuthService {
     constructor(
         @Inject('UserRepository') private UserRepository: Repository<IUser>
     ) { }
-    public generateToken(user, key: string, days?: number) {
+    public generateToken(user, key: string, days: number = 30) {
         const today = new Date();
         const exp = new Date(today);
-        const expirationDays = days !== undefined ? days : 0;
-        exp.setSeconds(today.getSeconds() + (expirationDays * 24 * 60 * 60) + (expirationDays === 0 ? 120 : 0));
+        exp.setSeconds(today.getSeconds() + (30 * 24 * 60 * 60));
 
         return jwt.sign(
             {
                 _id: user._id,
                 name: user.name,
-                exp: Math.floor(exp.getTime() / 1000),  // exp should be in seconds
+                exp: Math.floor(exp.getTime() / 1000),
             },
             key
         );
     }
-
     public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser }> {
         const salt = randomBytes(32);
         const hashedPassword = await argon2.hash(userInputDTO.password, { salt });

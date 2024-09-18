@@ -16,7 +16,7 @@ export default () => {
 
     router.get('/restaurants/restaurant-detail/:id', restaurant.getDataByIdRestaurant.bind(restaurant));
     router.get('/restaurants/featured-restaurants/:id', restaurant.getRestaurantByFeatured.bind(restaurant));
-    router.get('/restaurants/restaurant-detail-by-name/:name', isAuth, restaurant.getRestaurantByName.bind(restaurant));
+    router.get('/restaurants/restaurant-detail-by-name/:name', restaurant.getRestaurantByName.bind(restaurant));
     router.get('/restaurants/dish-restaurant/:id', isAuth, dish.getDataByIdRestaurant.bind(dish));
 
     router.post('/users/signin', celebrate({

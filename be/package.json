@@ -26,6 +26,7 @@
       "mysql2": "^3.9.7",
       "path": "^0.12.7",
       "reflect-metadata": "^0.2.2",
+      "socket.io": "^4.7.5",
       "typedi": "^0.10.0",
       "typeorm": "^0.3.20"
    },
